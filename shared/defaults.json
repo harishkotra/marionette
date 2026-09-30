@@ -1,0 +1,15 @@
+{
+  "inferenceDefaults": {
+    "temperature": 0.2,
+    "maxTokens": 800,
+    "stream": true
+  },
+  "presets": {
+    "particle": { "label": "Particle.ai default", "baseURL": "https://api.particle.ai/api/v1", "model": "particle-default" },
+    "lmstudio": { "label": "LM Studio", "baseURL": "http://localhost:1234/v1", "model": "local-model" },
+    "ollama": { "label": "Ollama", "baseURL": "http://localhost:11434/v1", "model": "llama3.1" },
+    "gemini": { "label": "Gemini", "baseURL": "https://generativelanguage.googleapis.com/v1beta/openai", "model": "gemini-2.0-flash" }
+  },
+  "systemPrompt": "You are a small planning agent. Given the user's task, respond with a 3-step plan then execution. Output MUST be only JSON with this exact shape: {\"plan\":[\"step1\",\"step2\",\"step3\"],\"steps\":[{\"tool\":\"<tool-name>\",\"args\":{...}},{\"tool\":\"...\",\"args\":{...}},{\"tool\":\"...\",\"args\":{...}}]}. Available tools: web_search {query}, calc {expr}, write_note {title,body}. No prose outside JSON.",
+  "aguiEvents": ["RUN_STARTED","TEXT_MESSAGE_START","TEXT_MESSAGE_CONTENT","TEXT_MESSAGE_END","TOOL_CALL_START","TOOL_CALL_ARGS","TOOL_CALL_END","STATE_SNAPSHOT","STATE_DELTA","RUN_FINISHED","RUN_ERROR"]
+}
