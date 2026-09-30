@@ -26,6 +26,8 @@
 
 ## Demo
 
+![App screenshot — green conformance badge, raw event log and rendered view](docs/screenshot.png)
+
 1. Pick a backend tab (**Mastra** / **Minimal**), type a task, hit **Run**.
 2. The **left pane** appends raw SSE events (monospace, colour-coded by type, with
    timestamps and inter-event latency). The **right pane** renders text, tool-call
@@ -34,6 +36,20 @@
    (`code: "ABORTED"`), rendered in the canvas — never a spinner forever.
 4. Run both backends on the same input: the **protocol conformance badge** goes
    green and the diff pane prints `identical event-type sequence (N events)`.
+
+### Taking a screenshot without a real LLM
+
+`scripts/mock-llm.mjs` is a stub OpenAI-compatible endpoint (streaming plan JSON,
+`GET /v1/models`) purely so the UI can be demoed/photographed with no local model:
+
+```bash
+node scripts/mock-llm.mjs &          # :4141
+npm run dev --workspace server       # :3101
+npm run dev --workspace client       # :5173 (or :5174 if :5173 is taken)
+```
+
+Then set Base URL `http://localhost:4141/v1`, model `mock-model`, Run Mastra,
+Run Minimal, screenshot. (The mock is a demo aid only — never part of the app.)
 
 ## Tech stack
 
